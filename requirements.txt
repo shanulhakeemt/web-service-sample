@@ -1,0 +1,7 @@
+fastapi==0.95.2  # FastAPI framework
+uvicorn==0.22.0  # ASGI server for serving FastAPI applications
+SQLAlchemy==2.0.19  # ORM for database interactions
+cffi==1.16.0
+cryptography==42.0.8
+jwt==1.3.1
+pycparser==2.22
