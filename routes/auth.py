@@ -8,7 +8,7 @@ from fastapi import APIRouter
 from database import get_db
 from sqlalchemy.orm import Session
 from pydantic_schemas.user_login import UserLogin
-import jwt
+import jwt as pyjwt
 from sqlalchemy.orm import joinedload
 from middleware.auth_middleware import auth_middleware
 import os
@@ -51,7 +51,7 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(400, 'Invalid password')
 
     try:
-        token = jwt.encode({"id": user_db.id}, SECRET_KEY, algorithm='HS256')
+        token = pyjwt.encode({"id": user_db.id}, SECRET_KEY, algorithm='HS256')
     except Exception as e:
         raise HTTPException(500, f"JWT Encoding Error: {str(e)}")
 
