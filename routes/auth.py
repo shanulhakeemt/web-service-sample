@@ -10,9 +10,11 @@ from sqlalchemy.orm import Session
 from pydantic_schemas.user_login import UserLogin
 import jwt
 from sqlalchemy.orm import joinedload
-
-
 from middleware.auth_middleware import auth_middleware
+import os
+
+# Get the secret key from environment variables
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", "default_secret")
 
 
 
@@ -49,7 +51,7 @@ def login_user(user:UserLogin,db:Session=Depends(get_db)):
       if not is_match:
             raise HTTPException(400,'Invalid password')
       
-      token=jwt.encode({"id":user_db.id},"password_key",algorithm="HS256")
+      token=jwt.encode({"id":user_db.id},"SECRET_KEY",algorithm="HS256")
 
       return {"token":token,"user":user_db}
 
