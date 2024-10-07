@@ -49,7 +49,7 @@ def login_user(user:UserLogin,db:Session=Depends(get_db)):
       if not is_match:
             raise HTTPException(400,'Invalid password')
       
-      token=jwt.encode({"id":user_db.id},"password_key",algorithm="HS256")
+      token=jwt.encode({"id":user_db.id},"password_key")
 
       return {"token":token,"user":user_db}
 
