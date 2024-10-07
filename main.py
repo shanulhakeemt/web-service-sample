@@ -12,6 +12,8 @@ app = FastAPI()
 app.include_router(auth.router, prefix='/auth')
 app.include_router(song.router, prefix='/song')
 
+# postgresql://render_example_q167_user:1YoSQ50RhpjigXrhXClvfrkGpc6ccBOT@dpg-cs1oh45ds78s73b7umb0-a.singapore-postgres.render.com/render_example_q167
+
 Base.metadata.create_all(engin)
 
 if __name__ == "__main__":
