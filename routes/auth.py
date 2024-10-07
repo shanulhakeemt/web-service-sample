@@ -8,7 +8,7 @@ from fastapi import APIRouter
 from database import get_db
 from sqlalchemy.orm import Session
 from pydantic_schemas.user_login import UserLogin
-from jwt import encode
+import jwt
 from sqlalchemy.orm import joinedload
 
 
@@ -49,7 +49,7 @@ def login_user(user:UserLogin,db:Session=Depends(get_db)):
       if not is_match:
             raise HTTPException(400,'Invalid password')
       
-      token=encode({"id":user_db.id},"password_key")
+      token=jwt.encode({"id":user_db.id},"password_key")
 
       return {"token":token,"user":user_db}
 
